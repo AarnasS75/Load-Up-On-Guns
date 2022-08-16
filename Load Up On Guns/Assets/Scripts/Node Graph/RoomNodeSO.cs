@@ -5,9 +5,9 @@ using System;
 
 public class RoomNodeSO : ScriptableObject
 {
-    public string id;
-    public List<string> parentRoomNodeIDList = new List<string>();
-    public List<string> childRoomroomNodeIDList = new List<string>();
+    [HideInInspector] public string id;
+    [HideInInspector] public List<string> parentRoomNodeIDList = new();
+    [HideInInspector] public List<string> childRoomroomNodeIDList = new();
     [HideInInspector] public RoomNodeGraphSO roomNodeGraph;
     public RoomNodeTypeSO roomNodeType;
     [HideInInspector] public RoomNodeTypeListSO roomNodeTypeList;
@@ -59,6 +59,33 @@ public class RoomNodeSO : ScriptableObject
             int selection = EditorGUILayout.Popup("", selected, GetRoomNodeTypesToDisplay());
 
             roomNodeType = roomNodeTypeList.list[selection];
+
+            // If the room type selection has changed making child connections potentially invalid
+            if (roomNodeTypeList.list[selected].isCorridor && !roomNodeTypeList.list[selection].isCorridor ||
+                !roomNodeTypeList.list[selected].isCorridor && roomNodeTypeList.list[selection].isCorridor ||
+                !roomNodeTypeList.list[selected].isBossRoom && roomNodeTypeList.list[selection].isBossRoom)
+            {
+
+                if (childRoomroomNodeIDList.Count > 0)
+                {
+                    for (int i = childRoomroomNodeIDList.Count - 1; i >= 0; i--)
+                    {
+                        // Get Child room node
+                        RoomNodeSO childRoomNode = roomNodeGraph.GetRoomNode(childRoomroomNodeIDList[i]);
+
+                        // If the child room node is not null
+                        if (childRoomNode != null)
+                        {
+                            // Remove childID from parent room node
+                            RemoveChildRoomNodeIDFromRoomNode(childRoomNode.id);
+
+                            // Remove parentID from child room node
+                            childRoomNode.RemoveParentRoomNodeIDFromRoomNode(id);
+                        }
+                    }
+                }
+
+            }
         }
 
         if (EditorGUI.EndChangeCheck())
@@ -277,6 +304,32 @@ public class RoomNodeSO : ScriptableObject
         parentRoomNodeIDList.Add(parentID);
 
         return true;
+    }
+    /// <summary>
+    /// Remove childID from the node (returns true if the node has been removed, false otherwise)
+    /// </summary>
+    public bool RemoveChildRoomNodeIDFromRoomNode(string childID)
+    {
+        if (childRoomroomNodeIDList.Contains(childID))
+        {
+            childRoomroomNodeIDList.Remove(childID);
+            return true;
+        }
+        return false;
+
+    }
+    /// <summary>
+    /// Remove parentID from the node (returns true if the node has been removed, false otherwise)
+    /// </summary>
+    public bool RemoveParentRoomNodeIDFromRoomNode(string childID)
+    {
+        if (parentRoomNodeIDList.Contains(childID))
+        {
+            parentRoomNodeIDList.Remove(childID);
+            return true;
+        }
+        return false;
+
     }
 #endif
 
