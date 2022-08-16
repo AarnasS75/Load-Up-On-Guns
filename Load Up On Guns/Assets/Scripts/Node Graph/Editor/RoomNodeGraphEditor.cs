@@ -10,8 +10,8 @@ public class RoomNodeGraphEditor : EditorWindow
 {
     private GUIStyle roomNodeStyle;
     private static RoomNodeGraphSO currentRoomNodeGraph;
+    private RoomNodeSO currentRoomNode = null;
     private RoomNodeTypeListSO roomNodeTypeList;
-
 
     private const float nodeWidth = 160f;
     private const float nodeHeight = 75f;
@@ -63,7 +63,7 @@ public class RoomNodeGraphEditor : EditorWindow
         // If a scriptable object of type
         if(currentRoomNodeGraph != null)
         {
-            ProcessEvent(Event.current);
+            ProcessEvents(Event.current);
 
             // Draw room nodes
             DrawRoomNodes();
@@ -89,10 +89,39 @@ public class RoomNodeGraphEditor : EditorWindow
         GUI.changed = true;
     }
 
-    private void ProcessEvent(Event currentEvent)
+    private void ProcessEvents(Event currentEvent)
     {
-        ProcessRoomNodeGraphEvets(currentEvent);
+        // Get room node that mouse is over if it's null or currently being dragged
+        if(currentRoomNode == null || currentRoomNode.isLeftClickDragging == false)
+        {
+            currentRoomNode = IsMouseOverRoomNode(currentEvent);
+        }
+        // If mouse isn't over a room node or we are currently dragging a line from the room node then process graph events
+        if (currentRoomNode == null || currentRoomNodeGraph.roomNodeToDrawFrom != null)
+        {
+            ProcessRoomNodeGraphEvets(currentEvent);
+        }
+        else
+        {
+            currentRoomNode.ProcessEvents(currentEvent);
+        }
+        
     }
+    /// <summary>
+    /// Check to see if mouse is over a room node - if so then return th room node else - null
+    /// </summary>
+    private RoomNodeSO IsMouseOverRoomNode(Event currentEvent)
+    {
+        for (int i = currentRoomNodeGraph.roomNodeList.Count - 1; i >= 0; i--)
+        {
+            if (currentRoomNodeGraph.roomNodeList[i].rect.Contains(currentEvent.mousePosition))
+            {
+                return currentRoomNodeGraph.roomNodeList[i];
+            }
+        }
+        return null;
+    }
+
     /// <summary>
     /// Process Room Node Graph Events
     /// </summary>
@@ -103,14 +132,17 @@ public class RoomNodeGraphEditor : EditorWindow
             case EventType.MouseDown:
                 ProcessMouseDownEvent(currentEvent);
                 break;
+            case EventType.MouseDrag:
+                ProcessMouseDragEvent(currentEvent);
+                break;
             default:
                 break;
         }
     }
+
     /// <summary>
     /// Process mouse down events on the room node graph (not over a node)
     /// </summary>
-    /// <param name="currentEvent"></param>
     private void ProcessMouseDownEvent(Event currentEvent)
     {
         // Right click
@@ -118,6 +150,33 @@ public class RoomNodeGraphEditor : EditorWindow
         {
             ShowContextMenu(currentEvent.mousePosition);
         }
+    }
+    /// <summary>
+    /// Process mouse drag event
+    /// </summary>
+    private void ProcessMouseDragEvent(Event currentEvent)
+    {
+        // Right click - draw line
+        if (currentEvent.button == 1)
+        {
+            ProcessRightMouseDragEvent(currentEvent);
+        }
+    }
+
+    private void ProcessRightMouseDragEvent(Event currentEvent)
+    {
+        if (currentRoomNodeGraph.roomNodeToDrawFrom != null)
+        {
+            DragConnectingLine(currentEvent.delta);
+            GUI.changed = true;
+        }
+    }
+    /// <summary>
+    /// Drag connecting line
+    /// </summary>
+    private void DragConnectingLine(Vector2 delta)
+    {
+        currentRoomNodeGraph.linePosition += delta;
     }
 
     private void ShowContextMenu(Vector2 mousePosition)
