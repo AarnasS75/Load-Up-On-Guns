@@ -5,9 +5,9 @@ using System;
 
 public class RoomNodeSO : ScriptableObject
 {
-    [HideInInspector] public string id;
-    [HideInInspector] public List<string> parentRoomNodeIDList = new List<string>();
-    [HideInInspector] public List<string> childRoomroomNodeIDList = new List<string>();
+    public string id;
+    public List<string> parentRoomNodeIDList = new List<string>();
+    public List<string> childRoomroomNodeIDList = new List<string>();
     [HideInInspector] public RoomNodeGraphSO roomNodeGraph;
     public RoomNodeTypeSO roomNodeType;
     [HideInInspector] public RoomNodeTypeListSO roomNodeTypeList;
@@ -174,8 +174,24 @@ public class RoomNodeSO : ScriptableObject
         rect.position += delta;
         EditorUtility.SetDirty(this);
     }
+    /// <summary>
+    /// Add childID to the node (returns true if the node has been added, false otherwise)
+    /// </summary>
+    public bool AddChildRoomNodeIDToRoomNode(string childID)
+    {
+        childRoomroomNodeIDList.Add(childID);
 
+        return true;
+    }
+    /// <summary>
+    /// Add parentID to the node (returns true if the node has been added, false otherwise)
+    /// </summary>
+    public bool AddParentRoomNodeIDToRoomNode(string parentID)
+    {
+        parentRoomNodeIDList.Add(parentID);
 
+        return true;
+    }
 #endif
 
     #endregion
