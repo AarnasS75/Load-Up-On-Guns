@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64fa50e269f64f944b052b12b5db2f84, type: 3}
+  m_Name: DungeonLevel_Level2
+  m_EditorClassIdentifier: 
+  levelName: The Shadow Crypt
+  roomTemplateList:
+  - {fileID: 11400000, guid: ebc7898f88cf218449b384f033e86675, type: 2}
+  - {fileID: 11400000, guid: ead9fb8d1d6f0dd48886b54083b20f65, type: 2}
+  - {fileID: 11400000, guid: b497cf51860cc124088acdf3dfcc4bdc, type: 2}
+  - {fileID: 11400000, guid: aeaa238dda2b934409291731e7646e39, type: 2}
+  - {fileID: 11400000, guid: a9de631861c958a4b8b6f5da0f8d45a6, type: 2}
+  - {fileID: 11400000, guid: 230557191ef7e66449fde6cecaf858cb, type: 2}
+  - {fileID: 11400000, guid: 0570548b50ed26c469aa21fbd2cce109, type: 2}
+  - {fileID: 11400000, guid: 8560fcec9e5cd454aae62d7775c44da1, type: 2}
+  - {fileID: 11400000, guid: 44aecdcc3db913e4499e1717a8957c90, type: 2}
+  - {fileID: 11400000, guid: 03fb8e6e180566844b9c3942a093676e, type: 2}
+  - {fileID: 11400000, guid: 441b01f46e3eeb442ade8694ca990dae, type: 2}
+  - {fileID: 11400000, guid: a1c147aa88a50d64dbc012a46f5d011c, type: 2}
+  - {fileID: 11400000, guid: ffb5abf059fa3cb4187f05ee5225308f, type: 2}
+  - {fileID: 11400000, guid: 1cbc835c305513640970724d8b4d26ef, type: 2}
+  - {fileID: 11400000, guid: 6de62b1aab2953146a354bd9e5f255d0, type: 2}
+  - {fileID: 11400000, guid: ca3ebf2399132f74589db4539c90168f, type: 2}
+  - {fileID: 11400000, guid: 38e938fd0392ecd4f859df7c1a9a4371, type: 2}
+  roomNodeGraphList:
+  - {fileID: 11400000, guid: 2e68bef061dd01641b24ac914c24af68, type: 2}
+  - {fileID: 11400000, guid: 3104c495df2e31a40a0701e84dcb3ba4, type: 2}
