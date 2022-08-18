@@ -99,6 +99,36 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
     }
 
     /// <summary>
+    /// Get a room template by room template ID
+    /// </summary>
+    public RoomTemplateSO GetRoomTemplate(string roomTemplateID)
+    {
+        if(roomTemplateDictionary.TryGetValue(roomTemplateID, out RoomTemplateSO roomTemplate))
+        {
+            return roomTemplate;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Get a room by room ID
+    /// </summary>
+    public Room GetRoomByRoomID(string roomID)
+    {
+        if (dungeonBuilderRoomDictionary.TryGetValue(roomID, out Room room))
+        {
+            return room;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
     /// Clear dungeon room gameobjects and dungeon room dictionary
     /// </summary>
     private void ClearDungeon()
@@ -192,6 +222,8 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
                 noRoomOverlaps = CanPlaceRoomWithNoOverlaps(roomNode, parentRoom);
             }
         }
+
+        return noRoomOverlaps;
     }
     /// <summary>
     /// Attempt to place the room node in the dungeon
@@ -222,10 +254,19 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
             // Place the room - returns true, if the room doesn't overlap
             if(PlaceTheRoom(parentRoom, doorwayParent, room))
             {
+                roomOverlaps = false;
 
+                room.isPositioned = true;
+
+                dungeonBuilderRoomDictionary.Add(room.id, room);
+            }
+            else
+            {
+                roomOverlaps = true;
             }
 
         }
+        return true;
     }
 
     /// <summary>
@@ -329,8 +370,29 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
                 break;
         }
 
+        // Calculate room lower and upper bounds, based on positioning to align with parent doorway
+        room.lowerBounds = parentDoorwayPosition + adjustemt + room.templateLowerBounds - doorway.position;
+        room.upperBounds = room.lowerBounds + room.templateUpperBounds - room.templateLowerBounds;
 
+        Room overlappingRoom = CheckForRoomOverlap(room);
+
+        if(overlappingRoom == null)
+        {
+            // Mark the doorways as connected and unavailable
+            doorwayParent.isConnected = true;
+            doorwayParent.isUnavailable = true;
+
+            return true;
+
+        }
+        else
+        {
+            doorwayParent.isUnavailable = true;
+            return false;
+        }
     }
+
+
     /// <summary>
     /// Get the doorway from the doorway list, that has the opposite orientation to doorway
     /// </summary>
@@ -357,6 +419,61 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
         }
 
         return null;
+    }
+    /// <summary>
+    /// Check for room that overlap the upper and lwer bounds parameters
+    /// </summary>
+    private Room CheckForRoomOverlap(Room roomToTest)
+    {
+        foreach (KeyValuePair<string, Room> keyValuePair in dungeonBuilderRoomDictionary)
+        {
+            Room room = keyValuePair.Value;
+
+            // Skip room if the testing room is the same as room that hasn't been positioned yet
+            if (room.id == roomToTest.id || !room.isPositioned)
+            {
+                continue;
+            }
+
+            if(IsOverlappingRoom(roomToTest, room))
+            {
+                return room;
+            }
+        }
+
+        return null;
+    }
+    /// <summary>
+    /// Check if two rooms overlap each other
+    /// </summary>
+    private bool IsOverlappingRoom(Room room1, Room room2)
+    {
+        bool isOverlappingX = IsOverlappingInterval(room1.lowerBounds.x, room1.upperBounds.x, room2.lowerBounds.x, room2.upperBounds.x);
+        bool isOverlappingY = IsOverlappingInterval(room1.lowerBounds.y, room1.upperBounds.y, room2.lowerBounds.y, room2.upperBounds.y);
+
+        if (isOverlappingX && isOverlappingY)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    /// <summary>
+    /// Check if interval 1 overlaps interval 2 (if one room X axis value overlaps other room x value, and same for Y)
+    /// </summary>
+    private bool IsOverlappingInterval(int imin1, int imax1, int imin2, int imax2)
+    {
+        if (Mathf.Max(imin1, imin2) <= MathF.Min(imax1, imax2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
