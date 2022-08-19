@@ -48,6 +48,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             print("Couldn't build dungeon from specified rooms and node graphs");
         }
+        else
+        {
+            print("Success");
+        }
     }
 
     #region Validation

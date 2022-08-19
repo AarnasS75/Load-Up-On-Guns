@@ -47,56 +47,52 @@ public class DungeonLevelSO : ScriptableObject
             {
                 isEntrance = true;
             }
+        }
+        if (isNSCorridor == false)
+        {
+            Debug.Log("No NS Corridors were found");
+        }
 
-            if (isNSCorridor == false)
-            {
-                Debug.Log("No NS Corridors were found");
-            }
+        if (isEWCorridor == false)
+        {
+            Debug.Log("No EW Corridors were found");
+        }
+        if (isEntrance == false)
+        {
+            Debug.Log("No Entrance were found");
+        }
 
-            if (isEWCorridor == false)
-            {
-                Debug.Log("No EW Corridors were found");
-            }
-            if (isEntrance == false)
-            {
-                Debug.Log("No Entrance were found");
-            }
+        foreach (RoomNodeGraphSO roomNodeGraph in roomNodeGraphList)
+        {
+            if (roomNodeGraph == null)
+                return;
 
-            foreach (RoomNodeGraphSO roomNodeGraph in roomNodeGraphList)
+            foreach (RoomNodeSO roomNodeSO in roomNodeGraph.roomNodeList)
             {
-                if (roomNodeGraph == null)
-                    return;
+                if (roomNodeSO == null)
+                    continue;
 
-                foreach (RoomNodeSO roomNodeSO in roomNodeGraph.roomNodeList)
+                if (roomNodeSO.roomNodeType.isEntrance || roomNodeSO.roomNodeType.isCorridorEW || roomNodeSO.roomNodeType.isCorridorNS || roomNodeSO.roomNodeType.isCorridor || roomNodeSO.roomNodeType.isNone)
+                    continue;
+
+                bool isRoomNodeTypeFound = false;
+
+                foreach (RoomTemplateSO roomTemplateSO in roomTemplateList)
                 {
-                    if (roomNodeSO == null)
+                    if (roomTemplateSO == null)
                         continue;
 
-                    if (roomNodeSO.roomNodeType.isEntrance || roomNodeSO.roomNodeType.isCorridorEW || roomNodeSO.roomNodeType.isCorridorNS ||
-                        roomNodeSO.roomNodeType.isCorridor || roomNodeSO.roomNodeType.isNone)
+                    if (roomTemplateSO.roomNodeType == roomNodeSO.roomNodeType)
                     {
-                        continue;
+                        isRoomNodeTypeFound = true;
+                        break;
                     }
+                }
 
-                    bool isRoomNodeTypeFound = false;
-
-                    foreach (RoomTemplateSO roomTemplate in roomTemplateList)
-                    {
-                        if (roomTemplate == null)
-                            continue;
-
-                        if(roomTemplate.roomNodeType == roomNodeSO.roomNodeType)
-                        {
-                            isRoomNodeTypeFound = true;
-                            break;
-                        }
-                    }
-
-                    if (!isRoomNodeTypeFound)
-                    {
-                        Debug.Log("In " + this.name.ToString() + " : No room template " + roomNodeSO.roomNodeType.name.ToString() + 
-                            " found for node graph " + roomNodeGraph.name.ToString());
-                    }
+                if (!isRoomNodeTypeFound)
+                {
+                    Debug.Log("In " + this.name.ToString() + " : No room template " + roomNodeSO.roomNodeType.name.ToString() +
+                        " found for node graph " + roomNodeGraph.name.ToString());
                 }
             }
         }
