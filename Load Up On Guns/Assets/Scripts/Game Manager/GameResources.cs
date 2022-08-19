@@ -23,6 +23,7 @@ public class GameResources : MonoBehaviour
     #endregion
     public RoomNodeTypeListSO roomNodeTypeList;
 
+    public CurrentPlayerSO currentPlayerSO;
 
     public Material dimmedMaterial;
 }

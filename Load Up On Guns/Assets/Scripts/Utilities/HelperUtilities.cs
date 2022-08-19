@@ -45,4 +45,44 @@ public static class HelperUtilities
 
         return error;
     }
+
+    /// <summary>
+    /// Null value check
+    /// </summary>
+    public static bool ValidateCheckNullValues(Object thisObject, string fieldName, Object objectToCheck)
+    {
+        if (objectToCheck = null)
+        {
+            Debug.Log(fieldName + " is null and must contain a value in object" + thisObject.name.ToString());
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Positive value check, if zero is allowed, set zeroIsAllowed to true
+    /// </summary>
+    public static bool ValidateCheckPositiveValues(Object thisObject, string fieldName, int valueToCheck, bool isZeroAllowed)
+    {
+        bool error = false;
+
+        if (isZeroAllowed)
+        {
+            if(valueToCheck < 0)
+            {
+                Debug.Log(fieldName + " must contain a positive value or zero in object " + thisObject.name.ToString());
+                error = true;
+            }
+        }
+        else
+        {
+            if(valueToCheck <= 0)
+            {
+                Debug.Log(fieldName + " must contain a positive value in object " + thisObject.name.ToString());
+                error = true;
+            }
+        }
+
+        return error;
+    }
 }
