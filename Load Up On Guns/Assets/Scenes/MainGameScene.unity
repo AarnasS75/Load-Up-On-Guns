@@ -643,63 +643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1201060027
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2534881148518596854, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_Name
-      value: Thief
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534881148518596857, guid: 48087aecd5c78ed4097307976286b779, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 48087aecd5c78ed4097307976286b779, type: 3}
 --- !u!1 &1646817978
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1947100309}
   - component: {fileID: 1947100310}
+  - component: {fileID: 1947100311}
   m_Layer: 0
   m_Name: Cinemachine Traget Group
   m_TagString: Untagged
@@ -859,3 +803,15 @@ MonoBehaviour:
   m_RotationMode: 0
   m_UpdateMethod: 2
   m_Targets: []
+--- !u!114 &1947100311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947100308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e4ec38d03d4004ea0706ed5b956014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
