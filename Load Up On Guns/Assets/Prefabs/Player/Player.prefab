@@ -101,6 +101,12 @@ GameObject:
   - component: {fileID: 7285015694140997287}
   - component: {fileID: 7285015694140997284}
   - component: {fileID: 7285015694140997285}
+  - component: {fileID: 188714173560676896}
+  - component: {fileID: 8007103666503315466}
+  - component: {fileID: 5541060973395572600}
+  - component: {fileID: 1917776915404853280}
+  - component: {fileID: 863790200419875014}
+  - component: {fileID: 6266293775534697960}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -318,8 +324,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetailsSO: {fileID: 0}
   health: {fileID: 0}
+  idleEvent: {fileID: 0}
+  aimWeaponEvent: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  playerControl: {fileID: 0}
+  animatePlayer: {fileID: 0}
+--- !u!114 &188714173560676896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e66f1b7203295e4c833eaa1fcfb90ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponShootPosition: {fileID: 7285015695303495200}
+--- !u!114 &8007103666503315466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18954562a72f364a9c2b1d764bebd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5541060973395572600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe95bf264f8093b41bb6aa682d491184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1917776915404853280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc67bbb7cae25649802ba1b2eebbdc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &863790200419875014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7e5b3825d4fa44dae0be61d0f10133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6266293775534697960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285015694140997282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed425e59dc6c3944bb66f96e0c468395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponRotationPointTransform: {fileID: 7285015695282747756}
 --- !u!1 &7285015694664862829
 GameObject:
   m_ObjectHideFlags: 0

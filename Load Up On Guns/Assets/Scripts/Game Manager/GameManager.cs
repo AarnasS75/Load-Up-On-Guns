@@ -90,18 +90,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         return currentRoom;
     }
 
-    #region Validation
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        HelperUtilities.ValidateCheckEnumerableValues(this, nameof(dungeonLevelList), dungeonLevelList);
-    }
 
     public Player GetPlayer()
     {
         return player;
     }
 
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckEnumerableValues(this, nameof(dungeonLevelList), dungeonLevelList);
+    }
 #endif
     #endregion
 }

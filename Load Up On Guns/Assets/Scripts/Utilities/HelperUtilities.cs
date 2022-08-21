@@ -109,4 +109,69 @@ public static class HelperUtilities
 
         return nearestSpawnPosition;
     }
+
+    /// <summary>
+    /// Get mouse world position
+    /// </summary>
+    public static Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+
+        // Clamp mouse position to screen size
+        mouseScreenPosition.x = Mathf.Clamp(mouseScreenPosition.x, 0f, Screen.width);
+        mouseScreenPosition.y = Mathf.Clamp(mouseScreenPosition.y, 0f, Screen.height);
+
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+
+        worldPosition.z = 0f;
+
+        return worldPosition;
+    }
+
+    /// <summary>
+    /// Get the angle in degrees from a direction vector
+    /// </summary>
+    public static float GetAngleFromVector(Vector3 vector)
+    {
+        float radians = Mathf.Atan2(vector.y, vector.x);
+        float degrees = radians * Mathf.Rad2Deg;
+        
+        return degrees;
+    }
+
+    public static AimDirection GetAimDirection(float angleDegree)
+    {
+        AimDirection aimDirection;
+
+        if (angleDegree >= 22f && angleDegree <= 67f)
+        {
+            aimDirection = AimDirection.UpRight;
+        }
+        else if (angleDegree > 67f && angleDegree <= 112f)
+        {
+            aimDirection = AimDirection.Up;
+        }
+        else if(angleDegree > 112f && angleDegree <= 158f)
+        {
+            aimDirection = AimDirection.UpLeft;
+        }
+        else if((angleDegree <= 180f && angleDegree > 158f) || (angleDegree > -180f && angleDegree <= -135f))
+        {
+            aimDirection = AimDirection.Left;
+        }
+        else if (angleDegree > -135f && angleDegree <= -45f)
+        {
+            aimDirection = AimDirection.Down;
+        }
+        else if ((angleDegree > -45 && angleDegree <= 0f) || (angleDegree > 0 && angleDegree < 22f))
+        {
+            aimDirection = AimDirection.Right;
+        }
+        else
+        {
+            aimDirection = AimDirection.Right;
+        }
+
+        return aimDirection;
+    }
 }

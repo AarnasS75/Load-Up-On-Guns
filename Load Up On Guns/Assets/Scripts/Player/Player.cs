@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 #region REQUIRE COMPONENTS
+[RequireComponent(typeof(PlayerControl))]
+[RequireComponent(typeof(AnimatePlayer))]
+[RequireComponent(typeof(Idle))]
+[RequireComponent(typeof(IdleEvent))]
+[RequireComponent(typeof(AimWeaponEvent))]
+[RequireComponent(typeof(AimWeapon))]
 [RequireComponent(typeof(SortingGroup))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -19,14 +25,21 @@ public class Player : MonoBehaviour
 {
     [HideInInspector] public PlayerDetailsSO playerDetailsSO;
     [HideInInspector] public Health health;
+    [HideInInspector] public IdleEvent idleEvent;
+    [HideInInspector] public AimWeaponEvent aimWeaponEvent;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SpriteRenderer spriteRenderer;
+    [HideInInspector] public PlayerControl playerControl;
+    [HideInInspector] public AnimatePlayer animatePlayer;
+
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         health = GetComponent<Health>();
+        aimWeaponEvent = GetComponent<AimWeaponEvent>();
+        idleEvent = GetComponent<IdleEvent>();
     }
 
     public void Initialize(PlayerDetailsSO playerDetailsSO)
