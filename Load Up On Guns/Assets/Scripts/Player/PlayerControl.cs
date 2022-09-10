@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [SerializeField] private MovementDetailsSO movementDetails;
+
     [SerializeField] private Transform weaponShootPosition;
     private Player player;
+
+    private float moveSpeed;
 
     private void Awake()
     {
         player = GetComponent<Player>();
+
+        moveSpeed = movementDetails.GetMoveSpeed();
     }
 
     private void Update()
@@ -21,7 +27,26 @@ public class PlayerControl : MonoBehaviour
 
     private void MovementInput()
     {
-        player.idleEvent.CallIdleEvent();
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        float verticalMovement = Input.GetAxisRaw("Vertical");
+
+        Vector2 direction = new Vector2(horizontalMovement, verticalMovement);
+
+        if(horizontalMovement != 0 || verticalMovement != 0)
+        {
+            direction *= 0.7f;
+        }
+
+        // If there is movement
+        if(direction != Vector2.zero)
+        {
+            // Trigger movement event
+            player.movementByVelocityEvent.CallMovementByVelocityEvent(direction, moveSpeed);
+        }
+        else
+        {
+            player.idleEvent.CallIdleEvent();
+        }
     }
 
     private void WeaponInput()
@@ -49,4 +74,13 @@ public class PlayerControl : MonoBehaviour
 
         player.aimWeaponEvent.CallAimWeaponEvent(playerAimDirection, playerAngleDegrees, weaponAngleDegrees, weaponDirection);
     }
+
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValues(this, nameof(movementDetails), movementDetails);
+    }
+#endif
+    #endregion
 }
