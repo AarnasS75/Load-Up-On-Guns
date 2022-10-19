@@ -78,6 +78,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             print("Couldn't build dungeon from specified rooms and node graphs");
         }
 
+        StaticEventHandler.RoomChangedEvent(currentRoom);
+
         // Set player in a rough middle of the room
         player.gameObject.transform.position = new Vector3((currentRoom.lowerBounds.x + currentRoom.upperBounds.x) / 2f, (currentRoom.lowerBounds.y +
             currentRoom.upperBounds.y) / 2f, 0f);

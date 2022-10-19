@@ -26,7 +26,10 @@ public class PlayerControl : MonoBehaviour
     {
         // Create waitForFixed update for use in coroutine
         waitForFixedUpdate = new WaitForFixedUpdate();
+
+        SetPlayerAnimationSpeed();
     }
+
     private void Update()
     {
         if (isPlayerRolling)
@@ -152,6 +155,11 @@ public class PlayerControl : MonoBehaviour
             isPlayerRolling = false;
         }
     }
+    private void SetPlayerAnimationSpeed()
+    {
+        player.animator.speed = moveSpeed / Settings.baseSpeedForPlayerAnimations;
+    }
+
 
     #region Validation
 #if UNITY_EDITOR

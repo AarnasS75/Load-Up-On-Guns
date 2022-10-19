@@ -26,4 +26,8 @@ public class GameResources : MonoBehaviour
     public CurrentPlayerSO currentPlayerSO;
 
     public Material dimmedMaterial;
+
+    public Material litMaterial;
+
+    public Shader variableLitShader;
 }

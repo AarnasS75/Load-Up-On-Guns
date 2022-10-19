@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: -5067734714662338176}
   - component: {fileID: 3681064793616583462}
   - component: {fileID: 1389366070361817400}
+  - component: {fileID: 7239685108221731797}
   m_Layer: 13
   m_Name: DoorNS
   m_TagString: Untagged
@@ -265,3 +266,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorCollider: {fileID: 9209811844762026877}
   isBossRoomDoor: 0
+--- !u!114 &7239685108221731797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013334545338856914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb23bb9efbe587348b597d641b50d6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
